@@ -1,12 +1,14 @@
 import cv2
+from PyQt5 import QtWidgets
+from loginPageUI import Ui_Dialog
+from Models.databaseClass import Database
+import sys
+
+
 def myfunc():
-
     cam = cv2.VideoCapture(0)
-
     cv2.namedWindow("test")
-
     img_counter = 0
-
     while True:
         ret, frame = cam.read()
         if not ret:
@@ -25,24 +27,19 @@ def myfunc():
             cv2.imwrite(img_name, frame)
             print("{} Photo Taken".format(img_name))
             img_counter += 1
-
     cam.release()
-
     cv2.destroyAllWindows()
 
-# myfunc()
 
-from PyQt5 import QtCore, QtGui, QtWidgets
-import testPage
 
-from testPage import Ui_Dialog
 
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    Form = QtWidgets.QWidget()
-    ui = Ui_Dialog()
-    ui.setupUi(Form)
-    Form.show()
-    myfunc()
-    sys.exit(app.exec_())
+# if __name__ == "__main__":
+#
+#     app = QtWidgets.QApplication(sys.argv)
+#     Form = QtWidgets.QWidget()
+#     ui = Ui_Dialog()
+#     ui.setupUi(Form)
+#     Form.show()
+#     db = Database()
+#     myfunc()
+#     sys.exit(app.exec_())
