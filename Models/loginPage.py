@@ -111,7 +111,7 @@ if __name__ == "__main__":
     ui.setupUi(Form)
     Form.show()
     db = Database()
-    camera=Camera()
-    camera.openCamera()
+    # camera=Camera()
+    # camera.openCamera()
     sys.exit(app.exec_())
 

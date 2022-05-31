@@ -9,9 +9,43 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-import sys
+import sys , os
+
+from Models.cameraClass import Camera
+
+global Form
+from PyQt5.QtWidgets import QFileDialog, QMessageBox
+from cameraSetup import Ui_cameraSetup
 
 class Ui_projectDetails(object):
+    def chooseFolder(self):
+        home = os.getenv("HOME")
+        my_dir = QFileDialog.getExistingDirectory(None,"Open a folder", home,QFileDialog.ShowDirsOnly)
+        # add in filter here to only open folders with right file types
+        self.projectPathEdit.setText(my_dir)
+    def openProject(self):
+        breakpoint()
+
+    def openCamera(self):
+
+        if self.projectNameEdit.text() != "" and (self.projectPathEdit.text() != "Choose Folder") and (self.projectPathEdit.text() != ""):
+
+                QtWidgets.QApplication.closeAllWindows()
+                camera = Camera()
+
+                self.window = QtWidgets.QMainWindow()
+                self.ui = Ui_cameraSetup()
+                self.ui.setupUi(self.window,camera)
+                self.window.show()
+                camera.openCamera()
+        else:
+            msgBox = QMessageBox()
+            msgBox.setIcon(QMessageBox.Information)
+            msgBox.setText("Fill out Project Name and Folder Location ")
+            msgBox.setWindowTitle("Incorrect Login")
+            msgBox.setStandardButtons(QMessageBox.Yes | QMessageBox.No)
+
+
     def setupUi(self, projectDetails):
         projectDetails.setObjectName("projectDetails")
         projectDetails.resize(782, 457)
@@ -27,51 +61,59 @@ class Ui_projectDetails(object):
         self.formLayout.setFormAlignment(QtCore.Qt.AlignCenter)
         self.formLayout.setContentsMargins(0, 0, 0, 0)
         self.formLayout.setObjectName("formLayout")
-        self.label_2 = QtWidgets.QLabel(self.formLayoutWidget)
-        self.label_2.setStyleSheet("background-color:black\n"
+        self.projectTitle = QtWidgets.QLabel(self.formLayoutWidget)
+        self.projectTitle.setStyleSheet("background-color:black\n"
 "")
-        self.label_2.setAlignment(QtCore.Qt.AlignCenter)
-        self.label_2.setObjectName("label_2")
-        self.formLayout.setWidget(0, QtWidgets.QFormLayout.LabelRole, self.label_2)
-        self.lineEdit = QtWidgets.QLineEdit(self.formLayoutWidget)
-        self.lineEdit.setStyleSheet("background-color:grey")
-        self.lineEdit.setObjectName("lineEdit")
-        self.formLayout.setWidget(0, QtWidgets.QFormLayout.FieldRole, self.lineEdit)
-        self.label = QtWidgets.QLabel(self.formLayoutWidget)
-        self.label.setStyleSheet("background-color:black\n"
+        self.projectTitle.setAlignment(QtCore.Qt.AlignCenter)
+        self.projectTitle.setObjectName("projectTitle")
+        self.formLayout.setWidget(0, QtWidgets.QFormLayout.LabelRole, self.projectTitle)
+        self.projectNameEdit = QtWidgets.QLineEdit(self.formLayoutWidget)
+        self.projectNameEdit.setStyleSheet("background-color:grey")
+        self.projectNameEdit.setObjectName("projectNameEdit")
+        self.formLayout.setWidget(0, QtWidgets.QFormLayout.FieldRole, self.projectNameEdit)
+        self.fileTitle = QtWidgets.QLabel(self.formLayoutWidget)
+        self.fileTitle.setStyleSheet("background-color:black\n"
 "")
-        self.label.setAlignment(QtCore.Qt.AlignCenter)
-        self.label.setObjectName("label")
-        self.formLayout.setWidget(1, QtWidgets.QFormLayout.LabelRole, self.label)
-        self.lineEdit_2 = QtWidgets.QLineEdit(self.formLayoutWidget)
-        self.lineEdit_2.setStyleSheet("background-color:grey")
-        self.lineEdit_2.setObjectName("lineEdit_2")
-        self.formLayout.setWidget(1, QtWidgets.QFormLayout.FieldRole, self.lineEdit_2)
+        self.fileTitle.setAlignment(QtCore.Qt.AlignCenter)
+        self.fileTitle.setObjectName("fileTitle")
+        self.formLayout.setWidget(1, QtWidgets.QFormLayout.LabelRole, self.fileTitle)
+
+        self.projectPathEdit = QtWidgets.QPushButton(self.formLayoutWidget)
+        self.projectPathEdit.setGeometry(QtCore.QRect(30, 20, 100, 32))
+        self.projectPathEdit.setStyleSheet("background-color:black")
+        self.projectPathEdit.setObjectName("filePathButton")
+        self.projectPathEdit.setText("Choose Folder")
+
+        self.projectPathEdit.clicked.connect(self.chooseFolder)
+
+
+
+
+        self.formLayout.setWidget(1, QtWidgets.QFormLayout.FieldRole, self.projectPathEdit)
         self.dateEdit = QtWidgets.QDateEdit(self.formLayoutWidget)
         self.dateEdit.setStyleSheet("background-color:grey")
         self.dateEdit.setObjectName("dateEdit")
         self.formLayout.setWidget(2, QtWidgets.QFormLayout.FieldRole, self.dateEdit)
-        self.label_5 = QtWidgets.QLabel(self.formLayoutWidget)
+        self.dateTitle = QtWidgets.QLabel(self.formLayoutWidget)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Maximum, QtWidgets.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.label_5.sizePolicy().hasHeightForWidth())
-        self.label_5.setSizePolicy(sizePolicy)
-        self.label_5.setStyleSheet("background-color:black\n"
+        sizePolicy.setHeightForWidth(self.dateTitle.sizePolicy().hasHeightForWidth())
+        self.dateTitle.setSizePolicy(sizePolicy)
+        self.dateTitle.setStyleSheet("background-color:black\n"
 "")
-        self.label_5.setAlignment(QtCore.Qt.AlignCenter)
-        self.label_5.setObjectName("label_5")
-        self.formLayout.setWidget(2, QtWidgets.QFormLayout.LabelRole, self.label_5)
-        self.pushButton = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButton.setGeometry(QtCore.QRect(30, 20, 100, 32))
-        self.pushButton.setStyleSheet("background-color:black")
-        self.pushButton.setObjectName("pushButton")
-        self.label_4 = QtWidgets.QLabel(self.centralwidget)
-        self.label_4.setGeometry(QtCore.QRect(640, 360, 71, 31))
-        self.label_4.setStyleSheet("background-color:black\n"
-"")
-        self.label_4.setAlignment(QtCore.Qt.AlignCenter)
-        self.label_4.setObjectName("label_4")
+        self.dateTitle.setAlignment(QtCore.Qt.AlignCenter)
+        self.dateTitle.setObjectName("dateTitle")
+        self.formLayout.setWidget(2, QtWidgets.QFormLayout.LabelRole, self.dateTitle)
+        self.nextBtn = QtWidgets.QPushButton(self.centralwidget)
+        self.nextBtn.setGeometry(QtCore.QRect(630, 360, 100, 32))
+        self.nextBtn.setStyleSheet("background-color:black")
+
+        self.nextBtn.setObjectName("nextBtn")
+
+        self.nextBtn.clicked.connect(self.openCamera)
+
+
         projectDetails.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(projectDetails)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 782, 24))
@@ -86,12 +128,11 @@ class Ui_projectDetails(object):
 
     def retranslateUi(self, projectDetails):
         _translate = QtCore.QCoreApplication.translate
-        projectDetails.setWindowTitle(_translate("projectDetails", "MainWindow"))
-        self.label_2.setText(_translate("projectDetails", "Project Name"))
-        self.label.setText(_translate("projectDetails", "File Location "))
-        self.label_5.setText(_translate("projectDetails", "Date               "))
-        self.pushButton.setText(_translate("projectDetails", "Open Project"))
-        self.label_4.setText(_translate("projectDetails", "Next"))
+        projectDetails.setWindowTitle(_translate("projectDetails", "Project Details"))
+        self.projectTitle.setText(_translate("projectDetails", "Project Name"))
+        self.fileTitle.setText(_translate("projectDetails", "File Location "))
+        self.dateTitle.setText(_translate("projectDetails", "Date               "))
+        self.nextBtn.setText(_translate("projectDetails", "Next "))
 
 if __name__ == "__main__":
 
