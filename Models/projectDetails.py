@@ -10,9 +10,7 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 import sys , os
-
 from Models.cameraClass import Camera
-
 global Form
 from PyQt5.QtWidgets import QFileDialog, QMessageBox
 from cameraSetup import Ui_cameraSetup
@@ -29,10 +27,8 @@ class Ui_projectDetails(object):
     def openCamera(self):
 
         if self.projectNameEdit.text() != "" and (self.projectPathEdit.text() != "Choose Folder") and (self.projectPathEdit.text() != ""):
-
                 QtWidgets.QApplication.closeAllWindows()
-                camera = Camera()
-
+                camera = Camera(self.projectPathEdit.text(),self.projectNameEdit.text())
                 self.window = QtWidgets.QMainWindow()
                 self.ui = Ui_cameraSetup()
                 self.ui.setupUi(self.window,camera)
@@ -40,10 +36,11 @@ class Ui_projectDetails(object):
                 camera.openCamera()
         else:
             msgBox = QMessageBox()
-            msgBox.setIcon(QMessageBox.Information)
-            msgBox.setText("Fill out Project Name and Folder Location ")
-            msgBox.setWindowTitle("Incorrect Login")
-            msgBox.setStandardButtons(QMessageBox.Yes | QMessageBox.No)
+            msgBox.setIcon(QMessageBox.Warning)
+            msgBox.setText("Fill out Project Name and Folder Location")
+            msgBox.setWindowTitle("Invalid Information ")
+            msgBox.setStandardButtons(QMessageBox.Ok)
+            msgBox.exec()
 
 
     def setupUi(self, projectDetails):
@@ -134,11 +131,4 @@ class Ui_projectDetails(object):
         self.dateTitle.setText(_translate("projectDetails", "Date               "))
         self.nextBtn.setText(_translate("projectDetails", "Next "))
 
-if __name__ == "__main__":
 
-    app = QtWidgets.QApplication(sys.argv)
-    Form = QtWidgets.QWidget()
-    ui = Ui_projectDetails()
-    ui.setupUi(Form)
-    Form.show()
-    sys.exit(app.exec_())

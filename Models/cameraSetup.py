@@ -9,18 +9,6 @@
 import sys
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-import cv2
-import time, os
-
-from PyQt5.QtCore import QTimer
-from PyQt5.QtGui import *
-from PyQt5.QtWidgets import *
-from PyQt5.QtMultimedia import *
-from PyQt5.QtMultimediaWidgets import *
-
-
-from Models.cameraClass import Camera
-
 
 class Ui_cameraSetup(object):
 
@@ -47,7 +35,7 @@ class Ui_cameraSetup(object):
 
         self.image_label = QtWidgets.QLabel(cameraSetup)
         self.image_label.setObjectName("image_label")
-        # self.verticalLayout.addWidget(self.image_label)
+
         self.imagePreview.setObjectName("imagePreview")
 
 
