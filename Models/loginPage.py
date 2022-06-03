@@ -27,7 +27,7 @@ class Ui_MainWindow(object):
         usernameEdit = self.usernameEdit.text()
         passwordEdit = self.passwordEdit.text()
         user = User(usernameEdit, passwordEdit)
-        loggedIn = user.login()
+        loggedIn= user.login()
         print(loggedIn)
         if (loggedIn == True):
             Form.close()
@@ -45,8 +45,7 @@ class Ui_MainWindow(object):
             msgBox.setStandardButtons(QMessageBox.Yes | QMessageBox.No)
 
             returnValue = msgBox.exec()
-            # if returnValue == QMessageBox.Ok:
-            #     print('OK clicked')
+
             if returnValue == QMessageBox.No:
                 QtWidgets.QApplication.closeAllWindows()
 
@@ -110,8 +109,6 @@ if __name__ == "__main__":
     ui = Ui_MainWindow()
     ui.setupUi(Form)
     Form.show()
-    db = Database()
-    # camera=Camera()
-    # camera.openCamera()
+
     sys.exit(app.exec_())
 

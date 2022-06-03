@@ -11,6 +11,3 @@ class User():
         self.loggedIn=db.loginQuery(self.username,self.password)
         return self.loggedIn
 
-
-    def takePicture(self):
-        breakpoint()

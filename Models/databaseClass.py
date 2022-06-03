@@ -12,13 +12,11 @@ class Database():
             password="mE9bZfA8fW6W"
         )
 
-        print(mydb)
-        mycursor = mydb.cursor()
-        mycursor.execute("SELECT * FROM loginTbl")
-        myresult = mycursor.fetchall()
-        # print(myresult)
-        # for x in myresult:
-        #     print(x)
+        # print(mydb)
+        # mycursor = mydb.cursor()
+        # mycursor.execute("SELECT * FROM loginTbl")
+        # mycursor.fetchall()
+
 
 
     def loginQuery(self,username,password):
@@ -30,6 +28,17 @@ class Database():
             return True
         else:
             print("Login Failed")
+
+    def sayHi(self):
+        print("hi")
+
+    def saveImage(self,projectName,fileName,URL):
+        mycursor = mydb.cursor()
+        mycursor.execute("INSERT INTO `imageDB`(`projectName`, `fileName`, `URL`) VALUES ('"+projectName+"','"+fileName+"','"+URL+"')")
+        mydb.commit()
+        print("sending to db")
+
+
 
 
 
