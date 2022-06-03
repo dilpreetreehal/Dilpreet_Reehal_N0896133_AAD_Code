@@ -39,6 +39,9 @@ class Camera():
         db=Database()
         db.sayHi()
         db.saveImage(self.projectName,self.fileName,self.path)
+        print(self.projectName)
+        print(self.fileName)
+        print(self.path)
 
 
     def takePic(self):
@@ -67,9 +70,9 @@ class Camera():
 
         base_file = os.path.splitext(img_name)
 
-        self.fileName = self.path + base_file[0] + '.' + str(self.highestFileNumber) + '.v'
+        self.fileName = base_file[0] + '.' + str(self.highestFileNumber) + '.v'
 
-        os.rename(self.path + img_name, self.fileName)
+        os.rename(self.path + img_name, self.path+self.fileName)
 
         print("Photo Taken")
 
