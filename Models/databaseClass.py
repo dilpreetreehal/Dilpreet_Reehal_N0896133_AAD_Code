@@ -12,25 +12,17 @@ class Database():
             password="mE9bZfA8fW6W"
         )
 
-        # print(mydb)
-        # mycursor = mydb.cursor()
-        # mycursor.execute("SELECT * FROM loginTbl")
-        # mycursor.fetchall()
-
-
 
     def loginQuery(self,username,password):
         mycursor = mydb.cursor()
         mycursor.execute("SELECT * FROM `loginTbl` WHERE `userName`='"+username+"' AND password=PASSWORD('"+password+"')")
 
         if mycursor.fetchone():
-            print("Logged In")
             return True
         else:
+            # add this to logs
             print("Login Failed")
 
-    def sayHi(self):
-        print("hi")
 
     def saveImage(self,projectName,fileName,URL):
         mycursor = mydb.cursor()

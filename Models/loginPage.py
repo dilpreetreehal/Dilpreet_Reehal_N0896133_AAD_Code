@@ -27,7 +27,7 @@ class Ui_MainWindow(object):
         usernameEdit = self.usernameEdit.text()
         passwordEdit = self.passwordEdit.text()
         user = User(usernameEdit, passwordEdit)
-        loggedIn= user.login()
+        loggedIn = user.login()
         print(loggedIn)
         if (loggedIn == True):
             Form.close()
