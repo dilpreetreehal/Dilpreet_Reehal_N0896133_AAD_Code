@@ -3,7 +3,7 @@ import cv2
 import os
 
 from Models.databaseClass import Database
-
+from datetime import datetime
 
 class Camera():
 
@@ -13,17 +13,27 @@ class Camera():
         self.highestFileNumber = 0
         self.fileName = ""
         self.row=0
+        self.timeStamp=0
 
     def setRow(self,row):
         self.row=row
         print(self.row)
 
     def datFile(self):
-        print("dat File")
-        d = open("TestDat.dat", "w")
-        # d.write()
+
+        now = datetime.now()
+        date = now.strftime("%d/%m/%Y %H:%M:%S")
+
+        datFile = open(self.path + self.fileName + ".dat", "w")
+        datFile.write(date)
 
 
+
+    def commandLog(self):
+        breakpoint()
+
+    def messageLog(self):
+        breakpoint()
 
 
 
@@ -83,9 +93,9 @@ class Camera():
 
         base_file = os.path.splitext(img_name)
 
-        self.fileName = base_file[0] + '.' + str(self.highestFileNumber)  + '.' + str(self.row) +'.v'
+        self.fileName = base_file[0] + '.' + str(self.highestFileNumber)  + '.' + str(self.row)
 
-        os.rename(self.path + img_name, self.path+self.fileName)
+        os.rename(self.path + img_name, self.path+self.fileName + '.v')
 
         print("Photo Taken")
 

@@ -91,3 +91,4 @@ if __name__ == "__main__":
     ui.setupUi(cameraSetup)
     cameraSetup.show()
     sys.exit(app.exec_())
+    # sys.exit(QtWidgets.QApplication.closeAllWindows())
